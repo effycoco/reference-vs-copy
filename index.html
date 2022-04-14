@@ -89,7 +89,7 @@
     let add = function (a, b) { return a + b };
     let add2 = add;
     add2 = function (a, b) { return a - b };
-    console.log(add);
+    console.log(add); // unchanged, means that when assign add to add2, it is copied rather than refered
   </script>
 
 </body>
