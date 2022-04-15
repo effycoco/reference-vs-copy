@@ -64,27 +64,50 @@
     // The same thing goes for objects, let's say we have a person object
 
     // with Objects
+    console.clear();
     const person = {
       name: 'Wes Bos',
       age: 80
     };
-    const man = person;
-    man.age = 99;
-    console.log(person.age); // 99, reference
+    const person1 = person;
+    person1.age = 99;
+    console.log(person.age); // 99, refer, not copy
+    const person3 = Object.assign(person);
+    person3.age = 80;
+    console.log('person3', person3.age);// 80
+    console.log('person', person.age); // 80, refer, not copy
     // and think we make a copy:
 
     // how do we take a copy instead?
-    const hero = Object.assign(person);
-    console.log('hero', hero);
-    hero.age = 50;
-    console.log(person.age);//99, copied
-    console.log(hero.age);// 50
+    const person2 = Object.assign({}, person);// 如果不加{},则还是refer,并不创建新对象
+    console.log('person2', person2);
+    person2.age = 50;
+    console.log(person.age);//80, copy, not refer
+    console.log(person2.age);// 50 
     // 使用Object.assign时，可加第三个参数，也是object, 得到的object是几个作为参数的对象的合集
     const waiter = Object.assign({ age: 33 }, person, { number: 4 });
-    console.log(waiter); // {age: 99, name: 'Wes Bos', number: 4}
+    console.log(waiter); // {age: 80, name: 'Wes Bos', number: 4}
     // We will hopefully soon see the object ...spread
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    // 但Onject.assign的复制只复制了第一层，第二层还是增加指针，比如
+    const wes = {
+      name: 'wes',
+      age: 100,
+      social: {
+        twitter: '@wesbos',
+        facebook: 'wesbos.developer'
+      }
+    }
+    const dev = Object.assign({}, wes);
+    // 虽然dev复制了wesbos的第一层，但第二层wes.social与dev.social仍是同一内存的两个指针
+    dev.name = 'effy';
+    console.clear();
+    console.log('wes-name', wes.name);// wes
+    console.log('dev-name', dev.name);//effy, copy, not refer
+    dev.social.twitter = "@effy";
+    console.log('wes-social', wes.social.twitter); // effy
+    console.log('dev-social', dev.social.twitter); // effy, refer, not copy
     // test function
     let add = function (a, b) { return a + b };
     let add2 = add;

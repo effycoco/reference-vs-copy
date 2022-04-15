@@ -13,4 +13,6 @@ A project from [JavaScript 30 -14](https://youtu.be/YnfwDQ5XYF4).
 
 如何复制对象？
 
-1. `const object1=Object.assign(object0)`
+1. `const object1=Object.assign({},object0)`
+
+note: 换成`const object2=Object.assign(object0)`去掉了第一个参数空对象，则 object2 是仅增加了一个 object0 的新指针，而没有创建新对象。两者会随其中一个改变而同时改变。
