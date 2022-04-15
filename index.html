@@ -108,6 +108,13 @@
     dev.social.twitter = "@effy";
     console.log('wes-social', wes.social.twitter); // effy
     console.log('dev-social', dev.social.twitter); // effy, refer, not copy
+    // 另一种复制方式更彻底，先全部转换成字符串再转换回对象
+    const dev2 = JSON.parse(JSON.stringify(wes));
+    console.clear();
+    console.log(dev2);
+    dev2.social.twitter = '@nomi';
+    console.log('wes-twitter:', wes.social.twitter); // @effy
+    console.log('dev2-twitter:', dev2.social.twitter); // @nomi
     // test function
     let add = function (a, b) { return a + b };
     let add2 = add;

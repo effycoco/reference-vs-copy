@@ -13,6 +13,7 @@ A project from [JavaScript 30 -14](https://youtu.be/YnfwDQ5XYF4).
 
 如何复制对象？
 
-1. `const object1=Object.assign({},object0)`
+1. `const object1=Object.assign({},object0)`,但这种方式只复制了最外层的对象，若对象有内嵌结构，其内嵌结构是增加指针而不是复制
+2. `const object2=JSON.parse(JSON.stringfy(object0))`, 这种复制方式更彻底，复制了所有内嵌结构
 
-note: 换成`const object2=Object.assign(object0)`去掉了第一个参数空对象，则 object2 是仅增加了一个 object0 的新指针，而没有创建新对象。两者会随其中一个改变而同时改变。
+note: 对于`const object3=Object.assign(object0)`，去掉了第一个参数空对象，则 object3 是仅增加了一个 object0 的新指针，而没有创建新对象。两者会随其中一个改变而同时改变。
